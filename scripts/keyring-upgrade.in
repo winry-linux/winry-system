@@ -1,0 +1,12 @@
+#!/bin/sh
+
+source @prefix@/lib/winry/util-alpm.sh
+
+# recreate pacman gnupg master key
+systemctl start haveged
+
+rm -fr /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux winry
+
+systemctl stop haveged
